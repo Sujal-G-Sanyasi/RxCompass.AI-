@@ -2,8 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 RxCompass is an AI-powered disease prediction system designed for medical diagnostic analysis. The system leverages machine learning to analyze patient datasets and provide accurate disease prognosis predictions with comprehensive feature importance analysis and individual patient reports.
 
 ## Table of Contents
