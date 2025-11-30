@@ -4,6 +4,9 @@
 
 RxCompass is an AI-powered disease prediction system designed for medical diagnostic analysis. The system leverages machine learning to analyze patient datasets and provide accurate disease prognosis predictions with comprehensive feature importance analysis and individual patient reports.
 
+## Disclaimer
+Still under work and have to add numerous features and fix bugs!
+
 ## Table of Contents
 
 - [Overview](#overview)
