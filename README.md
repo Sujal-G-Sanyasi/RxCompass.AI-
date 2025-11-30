@@ -1,4 +1,6 @@
-# RxCompass - Seamless Disease Analysis
+# RxCompass
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -404,5 +406,3 @@ RxCompass/
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 **Medical Disclaimer**: This system is intended for educational and research purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult qualified healthcare professionals for medical decisions.
- 
- 
