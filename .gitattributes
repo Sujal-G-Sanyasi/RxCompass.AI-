@@ -1,16 +1,28 @@
+# Exclude entire data directory from language statistics
+data/** linguist-vendored
+data/** linguist-generated=true
+
 # Exclude data files from language statistics
 *.csv linguist-vendored
-*.json linguist-generated=false
+*.csv linguist-generated=true
 *.log linguist-vendored
 *.pkl linguist-vendored
 *.pickle linguist-vendored
 
-# Jupyter notebooks - mark as generated if needed
-*.ipynb linguist-documentation=false
+# Exclude Jupyter notebooks completely
+*.ipynb linguist-vendored
+*.ipynb linguist-generated=true
+notebooks/** linguist-vendored
 
-# Lock files
+# Exclude package lock files
 package-lock.json linguist-generated=true
 yarn.lock linguist-generated=true
+
+# Mark JSON config files as code (but exclude data JSON)
+*.json linguist-detectable=false
+package.json linguist-detectable=true
+tsconfig*.json linguist-detectable=true
+components.json linguist-detectable=true
 
 # Generated/distribution files
 dist/ linguist-vendored
