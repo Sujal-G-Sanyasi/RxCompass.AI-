@@ -1,24 +1,38 @@
-# Exclude entire data directory from language statistics
+# Force exclude data directory completely
 data/** linguist-vendored
 data/** linguist-generated=true
+data/** -linguist-detectable
 
-# Exclude data files from language statistics
+# Exclude all data files
 *.csv linguist-vendored
 *.csv linguist-generated=true
+*.csv -linguist-detectable
 *.log linguist-vendored
 *.pkl linguist-vendored
 *.pickle linguist-vendored
 
-# Exclude Jupyter notebooks completely
+# Force exclude ALL Jupyter notebooks completely - THIS IS THE KEY
 *.ipynb linguist-vendored
 *.ipynb linguist-generated=true
+*.ipynb -linguist-detectable
 notebooks/** linguist-vendored
+notebooks/** linguist-generated=true
+notebooks/** -linguist-detectable
 
 # Exclude package lock files
 package-lock.json linguist-generated=true
 yarn.lock linguist-generated=true
 
-# Mark JSON config files as code (but exclude data JSON)
+# Mark only code files as detectable
+*.py linguist-detectable=true
+*.ts linguist-detectable=true
+*.tsx linguist-detectable=true
+*.js linguist-detectable=true
+*.jsx linguist-detectable=true
+*.html linguist-detectable=true
+*.css linguist-detectable=true
+
+# JSON config files
 *.json linguist-detectable=false
 package.json linguist-detectable=true
 tsconfig*.json linguist-detectable=true
