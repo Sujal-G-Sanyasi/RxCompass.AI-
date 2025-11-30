@@ -1,0 +1,29 @@
+# Exclude data files from language statistics
+*.csv linguist-vendored
+*.json linguist-generated=false
+*.log linguist-vendored
+*.pkl linguist-vendored
+*.pickle linguist-vendored
+
+# Jupyter notebooks - mark as generated if needed
+*.ipynb linguist-documentation=false
+
+# Lock files
+package-lock.json linguist-generated=true
+yarn.lock linguist-generated=true
+
+# Generated/distribution files
+dist/ linguist-vendored
+build/ linguist-vendored
+*.min.js linguist-generated=true
+*.min.css linguist-generated=true
+
+# Ensure proper language detection
+*.py linguist-detectable=true
+*.ts linguist-detectable=true
+*.tsx linguist-detectable=true
+*.js linguist-detectable=true
+*.jsx linguist-detectable=true
+*.html linguist-detectable=true
+*.css linguist-detectable=true
+
