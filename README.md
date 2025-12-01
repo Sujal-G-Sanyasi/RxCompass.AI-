@@ -32,7 +32,7 @@ RxCompass processes patient medical data through a comprehensive machine learnin
 
 The machine learning pipeline is implemented across multiple stages, each serving a critical role in ensuring model accuracy and prediction reliability.
 
-### Data Cleaning (`src/data_preprocessing.py`)
+### 1. Data Cleaning (`src/data_preprocessing.py`)
 
 The `DataCleaning` class provides foundational data quality assessment and preprocessing capabilities:
 
@@ -42,7 +42,7 @@ The `DataCleaning` class provides foundational data quality assessment and prepr
 
 **Significance**: This stage ensures data quality and reduces redundant features, preventing model overfitting and improving generalization performance.
 
-### Feature Engineering (`src/data_preprocessing.py`)
+### 2. Feature Engineering (`src/data_preprocessing.py`)
 
 The `FeatureEng` class handles feature transformation and encoding:
 
@@ -51,7 +51,7 @@ The `FeatureEng` class handles feature transformation and encoding:
 
 **Significance**: Proper encoding ensures compatibility with scikit-learn algorithms, while stratified splitting maintains class distribution across datasets.
 
-### Model Training (`src/modelWithPrediction.py`)
+### 3. Model Training (`src/modelWithPrediction.py`)
 
 The training pipeline evaluates multiple classification algorithms:
 
@@ -522,4 +522,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Medical Disclaimer**: This system is intended for educational and research purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult qualified healthcare professionals for medical decisions.
 
 ## Author 
-- [Sujal-G-Sanyasi]()
+- [Sujal-G-Sanyasi](https://github.com/Sujal-G-Sanyasi)
