@@ -28,7 +28,7 @@ def basic_file_environment() -> None:
     )
 basic_file_environment()
 
-df_og = pd.read_csv('data/Cleaned_dataset/Disease_Cleaned_train.csv')
+df_og = pd.read_csv('RxCompass.AI-/data/Cleaned_dataset/Disease_Cleaned_train.csv')
 
 
 def train_test_splits() -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
@@ -86,8 +86,8 @@ def collinearity_reduction(threshold = 0.85) -> tuple[pd.DataFrame, pd.DataFrame
         log.error(f"Error on removing Collinear Features: {error}")
     
     finally:
-        X_train_reduced.to_csv('data/PreProcessed_dataset/X_train_final.csv', index=False)
-        X_test_reduced.to_csv('data/PreProcessed_dataset/X_test_final.csv', index=False)
+        X_train_reduced.to_csv('RxCompass.AI-/data/PreProcessed_dataset/X_train_final.csv', index=False)
+        X_test_reduced.to_csv('RxCompass.AI-/data/PreProcessed_dataset/X_test_final.csv', index=False)
         log.debug("Saved PreProcessed (Train and test) Datasets to 'data/PreProcessed_dataset/' folder")
         
 df = collinearity_reduction(threshold=0.85)
@@ -120,11 +120,11 @@ def encoded_y_train() -> tuple[np.ndarray, np.ndarray]:
         y_dataframe_train = pd.DataFrame(y_train_enc, columns=['prognosis'])
         y_dataframe_test = pd.DataFrame(y_test_enc, columns=['prognosis'])
 
-        pickle.dump(le, open('RxCompass_App/backend/models/label_encoder.pkl', 'wb'))
+        pickle.dump(le, open('RxCompass.AI-/RxCompass_App/backend/models/label_encoder.pkl', 'wb'))
         log.debug(f"LabelEncoder() fitted and saved successfully")
         
-        y_dataframe_train.to_csv('data/PreProcessed_dataset/y_train_final.csv', index=False)
-        y_dataframe_test.to_csv('data/PreProcessed_dataset/y_test_final.csv', index=False)
+        y_dataframe_train.to_csv('RxCompass.AI-/data/PreProcessed_dataset/y_train_final.csv', index=False)
+        y_dataframe_test.to_csv('RxCompass.AI-/data/PreProcessed_dataset/y_test_final.csv', index=False)
         log.debug("Saved Encoded Output (Train and test) Datasets to 'data/PreProcessed_dataset/' folder")
 
 encoded_Ys = encoded_y_train()
@@ -156,7 +156,7 @@ def best_models(model) -> list:
             print(classification_report(y_test, y_pred))
             accuracy = accuracy_score(y_test, y_pred)
             
-            model_picked = pickle.dump(models[0], open('RxCompass_App/backend/models/RandomForest.pkl', 'wb'))
+            model_picked = pickle.dump(models[0], open('RxCompass.AI-/RxCompass_App/backend/models/RandomForest.pkl', 'wb'))
             log.debug(f"Model trained and saved successfully")  
 
         return predictions            

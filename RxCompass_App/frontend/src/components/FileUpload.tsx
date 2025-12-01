@@ -54,7 +54,7 @@ export const FileUpload = ({ onFileSelect, isLoading }: FileUploadProps) => {
   };
 
   return (
-    <Card className="p-8 border-2 border-dashed hover:border-primary transition-all duration-300">
+    <Card className="group p-8 rounded-2xl border border-border/60 hover:border-primary/80 bg-card/60 transition-all duration-300 ease-out transform hover:-translate-y-1 hover:shadow-[0_0_32px_rgba(56,189,248,0.45)]">
       <div
         className={`relative ${dragActive ? "opacity-50" : ""}`}
         onDragEnter={handleDrag}
@@ -72,9 +72,9 @@ export const FileUpload = ({ onFileSelect, isLoading }: FileUploadProps) => {
         />
         <label
           htmlFor="file-upload"
-          className="flex flex-col items-center justify-center cursor-pointer space-y-4"
+          className="flex flex-col items-center justify-center cursor-pointer space-y-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-xl transition-all duration-300"
         >
-          <div className="p-6 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+          <div className="p-6 rounded-full bg-primary/10 group-hover:bg-primary/25 group-hover:shadow-[0_0_30px_rgba(56,189,248,0.55)] transition-all duration-300 ease-out transform group-hover:scale-105">
             {fileName ? (
               <FileSpreadsheet className="h-12 w-12 text-primary" />
             ) : (
@@ -82,7 +82,7 @@ export const FileUpload = ({ onFileSelect, isLoading }: FileUploadProps) => {
             )}
           </div>
           <div className="text-center space-y-2">
-            <p className="text-lg font-semibold text-foreground">
+            <p className="text-lg font-semibold text-foreground tracking-wide group-hover:text-primary transition-colors duration-300">
               {fileName || "Upload Patient Dataset"}
             </p>
             <p className="text-sm text-muted-foreground">

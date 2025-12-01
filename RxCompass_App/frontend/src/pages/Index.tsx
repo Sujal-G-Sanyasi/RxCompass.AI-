@@ -3,8 +3,10 @@ import { FileUpload } from "@/components/FileUpload";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { PredictionResults } from "@/components/PredictionResults";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Activity, Stethoscope } from "lucide-react";
+import { Activity } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import RxLogo from "@/assets/Rxlogo.avif";
+import { useEffect } from "react";
 
 interface Prediction {
   patientId: number;
@@ -18,6 +20,12 @@ const Index = () => {
   const [predictions, setPredictions] = useState<Prediction[]>([]);
   const { toast } = useToast();
 
+  useEffect(() => {
+    document.documentElement.classList.add("neon-dark");
+  }, []);
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   const handleFileSelect = async (file: File) => {
     setIsLoading(true);
     setPredictions([]);
@@ -26,7 +34,7 @@ const Index = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch('http://localhost:5000/api/predict', {
+      const response = await fetch(`${API_URL}/api/predict`, {
         method: 'POST',
         body: formData,
       });
@@ -57,13 +65,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <ThemeToggle />
+      {isLoading && <LoadingScreen />}
       
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-accent">
-              <Stethoscope className="h-8 w-8 text-primary-foreground" />
+            <div className="p-2 rounded-lg bg-black overflow-hidden">
+              <img src={RxLogo} alt="RxCompass logo" className="h-16 w-16 object-contain bg-transparent" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-foreground">RxCompass</h1>
@@ -104,6 +113,38 @@ const Index = () => {
                   <div className="w-2 h-2 rounded-full bg-primary"></div>
                   Individual Patient Reports
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* Capability Highlights */}
+          {!isLoading && predictions.length === 0 && (
+            <div className="grid gap-6 md:grid-cols-3 mb-10">
+              <div className="cap-ml-card rounded-xl border border-border/70 bg-card/60 p-5 text-left transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_32px_rgba(59,130,246,0.6)]">
+                <h3 className="text-sm font-semibold tracking-wide text-primary uppercase mb-2">
+                  ML-Based Diagnosis Model
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  RxCompass uses a stacked ensemble of machine learning models, combining multiple learners into a single, more robust diagnostic signal instead of relying on just one classifier.
+                </p>
+              </div>
+
+              <div className="cap-82-card rounded-xl border border-border/70 bg-card/60 p-5 text-left transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_32px_rgba(147,51,234,0.6)]">
+                <h3 className="text-sm font-semibold tracking-wide text-accent uppercase mb-2">
+                  82 Feature / Symptoms Diagnosis
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Each run evaluates more than 82 clinical features and symptoms in parallel, so contributions are scored simultaneously instead of one factor at a time.
+                </p>
+              </div>
+
+              <div className="cap-batch-card rounded-xl border border-border/70 bg-card/60 p-5 text-left transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_32px_rgba(34,197,94,0.6)]">
+                <h3 className="text-sm font-semibold tracking-wide text-secondary uppercase mb-2">
+                  Batch Processing
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Upload a full CSV and RxCompass processes patients in batches, avoiding tedious one-by-one inputs and making cohort analysis seamless and easy to use.
+                </p>
               </div>
             </div>
           )}

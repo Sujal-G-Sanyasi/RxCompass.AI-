@@ -8,7 +8,10 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup": "node scripts/setup.js",
+    "setup:win": "scripts/setup.bat",
+    "setup:unix": "chmod +x scripts/setup.sh && scripts/setup.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

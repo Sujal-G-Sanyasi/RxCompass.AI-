@@ -1,53 +1,74 @@
-import { Activity, Brain, Sparkles } from "lucide-react";
-
 export const LoadingScreen = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-32 space-y-8">
-      <div className="relative">
-        {/* Outer glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-30 blur-2xl animate-pulse" 
-             style={{ width: '200px', height: '200px', left: '-40px', top: '-40px' }} />
-        
-        {/* Middle rotating ring */}
-        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-accent animate-spin" 
-             style={{ width: '120px', height: '120px' }} />
-        
-        {/* Inner pulsing gradient circle */}
-        <div className="relative p-8 rounded-full bg-gradient-to-br from-primary via-accent to-primary animate-pulse">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/50 to-accent/50 blur-xl" />
-          <Activity className="h-16 w-16 text-primary-foreground animate-pulse relative z-10" strokeWidth={2.5} />
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/95 backdrop-blur-sm">
+      <div className="relative w-full max-w-md px-4">
+        <div className="relative flex justify-center mb-8">
+          <div className="absolute inset-0 rounded-full bg-rose-500/20 animate-ping-slow" />
+          <div className="relative z-10">
+            <svg
+              viewBox="0 0 64 64"
+              className="w-32 h-32 text-rose-500 animate-pulse"
+              style={{
+                filter: 'drop-shadow(0 0 15px rgba(244, 63, 94, 0.6))',
+                animationDuration: '1.5s'
+              }}
+            >
+              <path
+                d="M32 54s-9.5-6.7-15-12.1C11.2 36.3 8 32.4 8 27.7 8 21 13.1 16 19.7 16c3.6 0 7 1.7 9.3 4.6C31.3 17.7 34.7 16 38.3 16 44.9 16 50 21 50 27.7c0 4.7-3.2 8.6-9 14.2C41.5 47.3 32 54 32 54z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className="text-center space-y-2">
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">
+            Analyzing Medical Data
+          </h3>
+          <p className="text-muted-foreground">
+            <span className="typewriter">Synthesizing silhouette-driven diagnosis…</span>
+          </p>
         </div>
         
-        {/* Floating sparkles */}
-        <Sparkles className="absolute -top-4 -right-4 h-8 w-8 text-accent animate-bounce" style={{ animationDelay: '0ms', animationDuration: '2s' }} />
-        <Sparkles className="absolute -bottom-4 -left-4 h-6 w-6 text-primary animate-bounce" style={{ animationDelay: '400ms', animationDuration: '2s' }} />
-        <Brain className="absolute top-0 left-12 h-7 w-7 text-accent/70 animate-pulse" style={{ animationDelay: '200ms' }} />
-      </div>
-      
-      <div className="text-center space-y-4 max-w-md">
-        <h3 className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse">
-          Analyzing Patient Data
-        </h3>
-        <p className="text-base text-muted-foreground">
-          Our AI model is processing your dataset with advanced machine learning algorithms
-        </p>
-        
-        {/* Loading dots animation */}
-        <div className="flex justify-center items-center space-x-2 pt-4">
-          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-primary to-accent animate-bounce" 
-               style={{ animationDelay: '0ms', animationDuration: '1s' }} />
-          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-accent to-primary animate-bounce" 
-               style={{ animationDelay: '200ms', animationDuration: '1s' }} />
-          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-primary to-accent animate-bounce" 
-               style={{ animationDelay: '400ms', animationDuration: '1s' }} />
-          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-accent to-primary animate-bounce" 
-               style={{ animationDelay: '600ms', animationDuration: '1s' }} />
-        </div>
-        
-        {/* Progress indicator */}
-        <div className="w-full bg-secondary/20 rounded-full h-2 overflow-hidden mt-6">
-          <div className="h-full bg-gradient-to-r from-primary via-accent to-primary animate-pulse" 
-               style={{ width: '70%', transition: 'width 0.3s ease' }} />
+        {/* Heart Rate Pulse Animation */}
+        <div className="mt-8 h-24 relative">
+          <svg 
+            viewBox="0 0 300 80" 
+            className="w-full h-full"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f43f5e" />
+                <stop offset="100%" stopColor="#f59e0b" />
+              </linearGradient>
+            </defs>
+
+            {/* Static faint baseline so the signal never fully disappears */}
+            <path
+              d="M0,40 L300,40"
+              fill="none"
+              stroke="url(#pulseGradient)"
+              strokeWidth="2"
+              strokeOpacity="0.25"
+              strokeLinecap="round"
+            />
+
+            {/* Animated ECG pulse over the baseline */}
+            <path 
+              d="M0,40 L40,40 L55,40 L65,20 L75,55 L85,30 L100,40 L130,40 L145,40 L155,18 L165,60 L178,32 L195,40 L225,40 L235,40 L245,22 L255,52 L265,35 L280,40 L300,40" 
+              fill="none" 
+              stroke="url(#pulseGradient)" 
+              strokeWidth="3" 
+              strokeLinecap="round"
+              strokeDasharray="600"
+              strokeDashoffset="600"
+              className="animate-draw"
+              style={{
+                filter: 'drop-shadow(0 0 5px rgba(244, 63, 94, 0.5))'
+              }}
+            />
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
         </div>
       </div>
     </div>

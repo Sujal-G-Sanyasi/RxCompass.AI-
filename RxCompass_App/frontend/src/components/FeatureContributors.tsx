@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Dot, Legend } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Dot } from "recharts";
 import { TrendingUp, Activity } from "lucide-react";
+import { BodySilhouette } from "./BodySilhouette";
 
 interface FeatureContributorsProps {
   contributors: Array<{ feature: string; importance: number }>;
@@ -104,57 +105,83 @@ export const FeatureContributors = ({ contributors, patientId }: FeatureContribu
         </div>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
-          {/* Chart */}
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart 
-              data={dataWithRank} 
-              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-              <XAxis 
-                dataKey="rank"
-                type="number"
-                scale="linear"
-                domain={[0.5, 10.5]}
-                tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
-                label={{ value: 'Rank (1 = Most Important)', position: 'insideBottom', offset: -10, fill: 'hsl(var(--muted-foreground))' }}
-                ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-              />
-              <YAxis 
-                tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
-                label={{ value: 'Contribution (%)', angle: -90, position: 'insideLeft', fill: 'hsl(var(--muted-foreground))' }}
-                domain={[0, 'dataMax + 2']}
-              />
-              <Tooltip 
-                content={<CustomTooltip />}
-                cursor={{ stroke: 'hsl(var(--primary))', strokeWidth: 2, strokeDasharray: '5 5' }}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="importance" 
-                stroke="hsl(var(--primary))"
-                strokeWidth={3}
-                dot={({ cx, cy, payload, index }) => {
-                  const color = getColorForIndex(index, payload.importance);
-                  return (
-                    <Dot 
-                      cx={cx} 
-                      cy={cy} 
-                      r={index < 3 ? 6 : 4}
-                      fill={color}
-                      stroke="hsl(var(--background))"
-                      strokeWidth={2}
-                    />
-                  );
-                }}
-                activeDot={{ r: 8, fill: 'hsl(var(--primary))', stroke: 'hsl(var(--background))', strokeWidth: 2 }}
-                isAnimationActive={true}
-                animationDuration={1000}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-          
+        <div className="space-y-6">
+          <div className="grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-6 items-center">
+            {/* Chart */}
+            <ResponsiveContainer width="100%" height={320}>
+              <LineChart
+                data={dataWithRank}
+                margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                <XAxis
+                  dataKey="rank"
+                  type="number"
+                  scale="linear"
+                  domain={[0.5, 10.5]}
+                  tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }}
+                  label={{
+                    value: "Rank (1 = Most Important)",
+                    position: "insideBottom",
+                    offset: -5,
+                    fill: "hsl(var(--muted-foreground))",
+                  }}
+                  ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                />
+                <YAxis
+                  tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }}
+                  label={{
+                    value: "Contribution (%)",
+                    angle: -90,
+                    position: "insideLeft",
+                    fill: "hsl(var(--muted-foreground))",
+                  }}
+                  domain={[0, "dataMax + 2"]}
+                />
+                <Tooltip
+                  content={<CustomTooltip />}
+                  cursor={{
+                    stroke: "hsl(var(--primary))",
+                    strokeWidth: 2,
+                    strokeDasharray: "5 5",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="importance"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth={3}
+                  dot={({ cx, cy, payload, index }) => {
+                    const color = getColorForIndex(index, payload.importance);
+                    return (
+                      <Dot
+                        cx={cx}
+                        cy={cy}
+                        r={index < 3 ? 6 : 4}
+                        fill={color}
+                        stroke="hsl(var(--background))"
+                        strokeWidth={2}
+                      />
+                    );
+                  }}
+                  activeDot={{
+                    r: 8,
+                    fill: "hsl(var(--primary))",
+                    stroke: "hsl(var(--background))",
+                    strokeWidth: 2,
+                  }}
+                  isAnimationActive={true}
+                  animationDuration={1000}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+
+            {/* Body silhouette */}
+            <div className="flex justify-center md:justify-end">
+              <BodySilhouette contributors={contributors} />
+            </div>
+          </div>
+
           {/* Feature Labels */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mt-4 pt-4 border-t">
             {dataWithRank.map((entry, index) => (
